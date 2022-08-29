@@ -1,0 +1,60 @@
+package Sample.sample;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class App1 {
+    public static void main(String[] args) {
+
+        JSONParser parser = new JSONParser();
+
+        try {     
+            Object obj = parser.parse(new FileReader("/home/nehalg/Desktop/Person.json"));
+
+            JSONObject jsonObject =  (JSONObject) obj;
+
+            String name = (String) jsonObject.get("name");
+            System.out.println(name);
+
+            String email = (String) jsonObject.get("email");
+            System.out.println(email);
+
+            String age = (String) jsonObject.get("age");
+            System.out.println(age);
+            
+            String married = (String) jsonObject.get("married");
+            System.out.println(married);
+
+            String weight = (String) jsonObject.get("weight");
+            System.out.println(weight);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+//Create a Json file with the below content
+//
+//Person.json
+//{
+//    "name":"Bob",
+//    "email":"bob@gmail.com",
+//    "age": 22,
+//    "married": false,
+//    "weight": 73.4
+//}
+//
+//Create a Java Class to represent this Person
+//
+//Read this json file and create an Java Object
+//
+//Print that Java Object in console

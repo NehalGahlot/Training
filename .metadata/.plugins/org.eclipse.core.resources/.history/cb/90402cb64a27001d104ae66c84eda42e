@@ -1,0 +1,87 @@
+package Sample.sample;
+
+import java.io.File;
+import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+public class App1{
+	
+    public static void main(String[] args) throws InterruptedException{
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        try {
+            Person person = mapper.readValue(new File("/home/nehalg/Desktop/person.json"), Person.class);
+            System.out.println("name: "+person.getname());
+            System.out.println("email: "+person.getemail());
+            System.out.println("age: "+person.getage());
+            System.out.println("married: "+person.getmarried());
+            System.out.println("weight: "+person.getweight());
+            
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class Person{
+    private String name;
+    private String email;
+    private String age;
+    private String married;
+    private String weight;
+
+    public String getname() {
+        return name;
+    }
+    public void setFirstName(String name) {
+        this.name = name;
+    }
+    public String getemail() {
+        return email;
+    }
+    public void setLastName(String lastName) {
+        this.email = email;
+    }
+    public String getage() {
+        return age;
+    }
+    public void setage(String age) {
+        this.age = age;
+    }
+    public String getmarried() {
+        return married;
+    }
+    public void setAddress(String married) {
+        this.married = married;
+    }
+    public String getweight() {
+        return weight;
+    }
+    public void setweight(String weight) {
+        this.weight = weight;
+    }
+//    public String getContact() {
+//        return contact;
+//    }
+//    public void setContact(String contact) {
+//        this.contact = contact;
+//    }
+}
+
+//Create a Json file with the below content
+//
+//Person.json
+//{
+//    "name":"Bob",
+//    "email":"bob@gmail.com",
+//    "age": 22,
+//    "married": false,
+//    "weight": 73.4
+//}
+//
+//Create a Java Class to represent this Person
+//
+//Read this json file and create an Java Object
+//
+//Print that Java Object in console

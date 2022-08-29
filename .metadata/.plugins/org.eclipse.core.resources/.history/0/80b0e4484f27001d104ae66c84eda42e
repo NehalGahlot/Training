@@ -1,0 +1,87 @@
+package Sample.sample;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+public class App1 {
+    public static void main(String[] args) {
+    	
+    	Person person = new Person();
+    	System.out.println(person.Name());
+        
+    }
+}
+
+class Person {
+	private String name;
+	private String email;
+	private long age;
+	private String married;
+	private double weight;
+	
+	private void dataparser() {
+		
+		JSONParser parser = new JSONParser();
+
+        try {     
+            Object obj = parser.parse(new FileReader("/home/nehalg/Desktop/Person.json"));
+
+            JSONObject jsonObject =  (JSONObject) obj;
+
+            String name = (String) jsonObject.get("name");
+            String email = (String) jsonObject.get("email");
+            Long age = (Long) jsonObject.get("age");
+            Boolean married = (Boolean) jsonObject.get("married");
+            Double weight = (Double) jsonObject.get("weight");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	String Name() {
+		return name;
+	}
+	
+	String Email() {
+		return email;
+	}
+	
+	long age() {
+		return age;
+	}
+	
+	String MaritalStatus() {
+		return married;
+	}
+	
+	double Weight() {
+		return weight;
+	}
+	
+}
+
+//Create a Json file with the below content
+//
+//Person.json
+//{
+//    "name":"Bob",
+//    "email":"bob@gmail.com",
+//    "age": 22,
+//    "married": false,
+//    "weight": 73.4
+//}
+//
+//Create a Java Class to represent this Person
+//
+//Read this json file and create an Java Object
+//
+//Print that Java Object in console
